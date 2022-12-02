@@ -17,7 +17,7 @@ import userinterface.SignUp.SignUp;
 
 /**
  *
- * @author Margi
+ * @author margiadesara
  */
 public class MainJFrame extends javax.swing.JFrame {
 

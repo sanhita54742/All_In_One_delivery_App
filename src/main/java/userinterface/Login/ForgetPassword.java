@@ -21,7 +21,7 @@ import Business.UserAccount.UserAccount;
 
 /**
  *
- * @author Margi
+ * @author margiadesara
  */
 public class ForgetPassword extends javax.swing.JPanel {
 

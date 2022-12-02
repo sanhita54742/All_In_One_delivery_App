@@ -18,7 +18,7 @@ import Business.UserAccount.UserAccount;
 
 /**
  *
- * @author yashjain
+ * @author margiadesara
  */
 public class LoginPage extends javax.swing.JPanel {
 
