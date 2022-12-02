@@ -124,7 +124,7 @@ public class ForgetPassword extends javax.swing.JPanel {
     }//GEN-LAST:event_AddBtn1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int Index = -1;
+         int Index = -1;
           for (int i = 0; i < customerList.size(); i++){
               if(customerList.get(i).getEmail().equals(updateUsernameText.getText())){
                   System.out.println("Hey " + customerList.get(i).getName() + "\n" +"Did you forget your password?" + "\n" +"Your Passwrod is: " + system.getCustomerDirectory().getCustomerList().get(i).getAccountDetails().getPassword() +"\n" + "If you dont want to change your password or didn't request this, please ignore and delete this message");
@@ -135,8 +135,16 @@ public class ForgetPassword extends javax.swing.JPanel {
                   break;
               }
           }
-                      
-        
+          if(Index >= 0){
+              
+              
+              CardLayout layout=(CardLayout)container.getLayout();
+              LoginPage su = new LoginPage(container, system, logoutJButton);
+              container.add("workArea",su);
+              layout.next(container);
+          }else{
+              JOptionPane.showMessageDialog(this,"Email Id not found, Try Signing up","Error message", JOptionPane.ERROR_MESSAGE);
+          }            
         
                   
     }//GEN-LAST:event_jButton1ActionPerformed
