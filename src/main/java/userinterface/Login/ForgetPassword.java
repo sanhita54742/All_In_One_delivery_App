@@ -13,6 +13,11 @@ import java.util.regex.Pattern;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import Business.Customer.Customer;
+import Business.Customer.SendMail;
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+
 
 /**
  *
@@ -31,9 +36,11 @@ public class ForgetPassword extends javax.swing.JPanel {
         this.container = container;
         this.system = system;
         this.logoutJButton = logoutJButton;
-        
-        
-        
+            
+        for (int i = 0; i < system.getCustomerDirectory().getCustomerList().size(); i++) {
+            customerList.add(system.getCustomerDirectory().getCustomerList().get(i));
+        }
+           
            
         initComponents();
     }
