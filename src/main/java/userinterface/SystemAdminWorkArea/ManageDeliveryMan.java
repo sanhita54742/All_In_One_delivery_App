@@ -559,6 +559,26 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
     private void delListComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delListComboActionPerformed
         // TODO add your handling code here:
+        if (delListCombo.getSelectedItem() != "None") {
+            String selectedItem = (String) delListCombo.getSelectedItem();
+            for (int i = 0; i < delManList.size(); i++) {
+                char[] ch = updatePwdText.getPassword();
+                String pwd = new String(ch);
+                if (delManList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    updateUsernameText.setText(delManList.get(i).getAccountDetails().getUsername());
+                    updatePwdText.setText(delManList.get(i).getAccountDetails().getPassword());
+                    updatePhoneText.setText(delManList.get(i).getPhone());
+                    updateNameText.setText(delManList.get(i).getName());
+                    updateAddressText.setText(delManList.get(i).getAddress());
+                }
+            }
+        }else{
+            updateUsernameText.setText("");
+            updatePwdText.setText("");
+            updatePhoneText.setText("");
+            updateNameText.setText("");
+            updateAddressText.setText("");
+        }
     }//GEN-LAST:event_delListComboActionPerformed
 
     private void updateNameTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateNameTextActionPerformed
