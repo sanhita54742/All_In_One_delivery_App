@@ -46,7 +46,6 @@ public class NetworkPanel extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         ManageCustomerButton3.setBackground(new java.awt.Color(102, 102, 255));
         ManageCustomerButton3.setForeground(new java.awt.Color(255, 255, 255));
@@ -73,7 +72,7 @@ public class NetworkPanel extends javax.swing.JPanel {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(ManageCustomerButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -83,7 +82,6 @@ public class NetworkPanel extends javax.swing.JPanel {
         add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 61, -1, 280));
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 255));
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         ManageCustomerButton4.setBackground(new java.awt.Color(102, 102, 255));
         ManageCustomerButton4.setForeground(new java.awt.Color(255, 255, 255));
