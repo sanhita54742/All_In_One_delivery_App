@@ -13,6 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import Business.Customer.Customer;
+import Business.DeliveryMan.DeliveryMan;
+import Business.EcoSystem;
 
 /**
  *
@@ -554,7 +557,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ManageCustomerButtonActionPerformed
 
     private void ManageGroceryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageGroceryButtonActionPerformed
-       
+        GroceryMain dm= new GroceryMain(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",dm);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_ManageGroceryButtonActionPerformed
 
     private void ManageDeliveryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDeliveryButtonActionPerformed
