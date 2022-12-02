@@ -42,6 +42,34 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         populateTree();
         lblSelectedNode.setVisible(false);
         
+        ImageIcon icon =  new ImageIcon("./src/images/grocery.png");
+        Image image = icon.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel7.setIcon(new ImageIcon(image));
+        
+        ImageIcon icon1 =  new ImageIcon("./src/images/delivery.png");
+        Image image1 = icon1.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel6.setIcon(new ImageIcon(image1));
+        
+        ImageIcon icon2 =  new ImageIcon("./src/images/customer.png");
+        Image image2 = icon2.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel3.setIcon(new ImageIcon(image2));
+        
+        ImageIcon icon3 =  new ImageIcon("./src/images/Doctor.jpeg");
+        Image image3 = icon3.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel8.setIcon(new ImageIcon(image3));
+        
+        ImageIcon icon4 =  new ImageIcon("./src/images/Maid2.png");
+        Image image4 = icon4.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel9.setIcon(new ImageIcon(image4));
+        
+        ImageIcon icon5 =  new ImageIcon("./src/images/lawyer.png");
+        Image image5 = icon5.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel10.setIcon(new ImageIcon(image5));
+        
+        ImageIcon icon6 =  new ImageIcon("./src/images/Restaurent.jpeg");
+        Image image6 = icon6.getImage().getScaledInstance(217, 167, Image.SCALE_SMOOTH);
+        jLabel11.setIcon(new ImageIcon(image6));
+        
         
     }
     
