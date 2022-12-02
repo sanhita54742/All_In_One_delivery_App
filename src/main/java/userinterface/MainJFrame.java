@@ -4,7 +4,11 @@
  */
 package userinterface;
 
+import Business.EcoSystem;
+import Business.DB4OUtil.DB4OUtil;
 
+import Business.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -106,7 +110,9 @@ public class MainJFrame extends javax.swing.JFrame {
         container.removeAll();
         CardLayout layout=(CardLayout)container.getLayout();
         LoginPage su = new LoginPage(container, system, logoutJButton);
-        
+        container.add("workArea",su);
+        layout.next(container);
+        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     /**

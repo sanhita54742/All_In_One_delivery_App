@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.SignUp.SignUp;
+import Business.EcoSystem;
+import Business.UserAccount.UserAccount;
+
 
 /**
  *
@@ -193,6 +196,10 @@ public class LoginPage extends javax.swing.JPanel {
 
     private void ForgetPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ForgetPasswordActionPerformed
         // TODO add your handling code here:
+        CardLayout layout=(CardLayout)container.getLayout();
+        ForgetPassword su = new ForgetPassword(container, system, logoutJButton);
+        container.add("workArea",su);
+        layout.next(container);
     }//GEN-LAST:event_ForgetPasswordActionPerformed
 
     private void SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpActionPerformed
@@ -213,7 +220,21 @@ public class LoginPage extends javax.swing.JPanel {
 
         //Step1: Check in the system admin user account directory if you have the user
         UserAccount userAccount=system.getUserAccountDirectory().authenticateUser(userName, password);
+        if(userAccount==null){
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+            return;
+        }
+        else{
+            CardLayout layout=(CardLayout)container.getLayout();
+            container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, system));
+            layout.next(container);
+            logoutJButton.setEnabled(true);
+        }
 
+        LoginButton.setEnabled(false);
+        //        logoutJButton.setEnabled(true);
+        userNameTxt.setEnabled(false);
+        passwordTxt.setEnabled(false);
         
     }//GEN-LAST:event_LoginButtonActionPerformed
 
