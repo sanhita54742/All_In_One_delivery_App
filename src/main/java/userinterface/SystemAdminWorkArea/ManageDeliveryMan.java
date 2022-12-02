@@ -615,6 +615,37 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
     private void deleteManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteManagerButtonActionPerformed
         // TODO add your handling code here:
+        boolean flag = false;
+
+        String selectedItem = (String) delListCombo.getSelectedItem();
+        delListCombo.getSelectedIndex();
+        if(delListCombo.getSelectedItem() == null || delListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateNameText.getText(), updatePwdText.getPassword(), "no")) {
+            return;
+        }
+        if (flag == false) {
+            Boolean isDeleteUser = ecosystem.getUserAccountDirectory().deleteUser(selectedItem);
+            ecosystem.getDeliveryManDirectory().deleteDeliveryMan(selectedItem);
+
+            for (int i = 0; i < deliveryManListTable.getRowCount(); i++) {
+                if (((String) deliveryManListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                    model.removeRow(i);
+                    delListCombo.removeItemAt(i + 1);
+                    updateNameText.setText("");
+                    updateUsernameText.setText("");
+                    updatePwdText.setText("");
+                    updatePhoneText.setText("");
+                    updateAddressText.setText("");
+                }//end of if block
+            }
+            if (isDeleteUser) {
+                System.out.println(selectedItem + "Deleted ...");
+                JOptionPane.showMessageDialog(this, "Delivery Man deleted successfully");
+            }
+        }
+        reset();
     }//GEN-LAST:event_deleteManagerButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
