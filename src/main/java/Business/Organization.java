@@ -70,6 +70,29 @@ public abstract class Organization {
             return value;
         }
     }
+    
+    
+    public Organization(String name) {
+        this.name = name;
+        workQueue = new WorkQueue();
+        employeeDirectory = new EmployeeDirectory();
+        userAccountDirectory = new UserAccountDirectory();
+        createNetwork = new createNetwork();
+        groceryDirectory = new GroceryDirectory();
+        maidDirectory = new MaidDirectory();
+        hotelDirectory = new HotelDirectory();
+        hotel_Directory = new Hotel_Directory();
+        hotelManagerDirectory = new HotelManagerDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();  
+        hospitalManagerDirectory = new HospitalManagerDirectory();
+        customerDirectory = new CustomerDirectory();
+        legalDirectory = new LegalDirectory();
+        groceryManagerDirectory = new GroceryManagerDirectory();
+        maidManagerDirectory = new MaidManagerDirectory();
+        orderDirectory = new OrderDirectory();
+        organizationID = counter;
+        ++counter;
+    }
  
     
     
