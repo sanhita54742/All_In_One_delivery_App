@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Margi
+ * @author margiadesara
  */
 public class NetworkPanel extends javax.swing.JPanel {
 
@@ -127,7 +127,15 @@ public class NetworkPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ManageCustomerButton3ActionPerformed
 
     private void ManageCustomerButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCustomerButton4ActionPerformed
-        // TODO add your handling code here:   
+        // TODO add your handling code here:  
+         if(ecosystem.getcreateNetwork().getNetwork().size() > 0 ) {
+            SystemAdminWorkAreaJPanel dm= new SystemAdminWorkAreaJPanel(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",dm);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        }else{
+            JOptionPane.showMessageDialog(this, "Kindly Add A Network");
+        }
     }//GEN-LAST:event_ManageCustomerButton4ActionPerformed
 
 

@@ -19,7 +19,7 @@ import Business.EcoSystem;
 
 /**
  *
- * @author Margi
+ * @author margiadesara
  */
 public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
@@ -588,22 +588,34 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void MaidBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaidBtnActionPerformed
         // TODO add your handling code here:
-       
+        ManagerMaidManagers hos= new ManagerMaidManagers(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",hos);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_MaidBtnActionPerformed
 
     private void LegalBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LegalBtnActionPerformed
         // TODO add your handling code here:
-      
+        ManageLegal hos= new ManageLegal(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",hos);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_LegalBtnActionPerformed
 
     private void LegalBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LegalBtn1ActionPerformed
         // TODO add your handling code here:
-       
+        HotelMain hos= new HotelMain(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",hos);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_LegalBtn1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
+        NetworkPanel hos= new NetworkPanel(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",hos);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
