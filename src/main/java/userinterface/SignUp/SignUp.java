@@ -36,10 +36,6 @@ public class SignUp extends javax.swing.JPanel {
             customerList.add(ecosystem.getCustomerDirectory().getCustomerList().get(i));
         }
         initComponents();
-        for (int i = 0; i < ecosystem.getcreateNetwork().getNetwork().size(); i++) {
-             System.out.println(ecosystem.getcreateNetwork().getNetwork().get(i));
-            jComboBox1.addItem(ecosystem.getcreateNetwork().getNetwork().get(i));
-        }
     }
 
     /**
