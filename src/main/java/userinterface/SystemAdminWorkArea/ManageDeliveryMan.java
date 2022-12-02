@@ -650,6 +650,45 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
+        if(delListCombo.getSelectedItem() == null || delListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateNameText.getText(), updatePwdText.getPassword() ,"no")) {
+            return;
+        }
+        if (delListCombo.getSelectedItem() != null) {
+            String selectedItem = (String) delListCombo.getSelectedItem();
+            for (int i = 0; i < delManList.size(); i++) {
+                char[] ch = updatePwdText.getPassword();
+                String pwd = new String(ch);
+                if (delManList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    delManList.get(i).setAddress(updateAddressText.getText());
+                    delManList.get(i).setPhone(updatePhoneText.getText());
+                    delManList.get(i).getAccountDetails().setPassword(pwd);
+                    delManList.get(i).setName(updateNameText.getText());
+                    delManList.get(i).getAccountDetails().setUsername(updateUsernameText.getText());
+                    System.out.println(selectedItem + "Deleted ...");
+                    JOptionPane.showMessageDialog(this, "Delivery Man updated successfully");
+                }
+            }
+        }
+        String selectedItem = (String) delListCombo.getSelectedItem();
+        delListCombo.getSelectedIndex();
+        for (int i = 0; i < deliveryManListTable.getRowCount(); i++) {
+            if (((String) deliveryManListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                delListCombo.addItem(updateNameText.getText());
+                model.addRow(new Object[]{
+                    updateNameText.getText(),
+                    updateAddressText.getText(),
+                    updatePhoneText.getText(),
+                    "Boston"
+                });
+                model.removeRow(i);
+                delListCombo.removeItemAt(i + 1);
+
+            }//end of if block
+        }
+        reset();
        
     }//GEN-LAST:event_updateButtonActionPerformed
     
