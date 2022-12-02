@@ -564,7 +564,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ManageGroceryButtonActionPerformed
 
     private void ManageDeliveryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageDeliveryButtonActionPerformed
-        
+        ManageDeliveryMan dm= new ManageDeliveryMan(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",dm);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_ManageDeliveryButtonActionPerformed
 
     private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
@@ -577,7 +580,10 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageHospitalButtonActionPerformed
         // TODO add your handling code here:
-     
+        ManagerHospitalManagers hos= new ManagerHospitalManagers(userProcessContainer, ecosystem);
+        userProcessContainer.add("manageNetworkJPanel",hos);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_manageHospitalButtonActionPerformed
 
     private void MaidBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaidBtnActionPerformed
