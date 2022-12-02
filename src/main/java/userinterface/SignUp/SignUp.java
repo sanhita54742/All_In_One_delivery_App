@@ -13,6 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import userinterface.Login.LoginPage;
+import Business.Customer.Customer;
+import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Role.CustomerRole;
+import Business.UserAccount.UserAccount;
 
 /**
  *
@@ -36,6 +41,10 @@ public class SignUp extends javax.swing.JPanel {
             customerList.add(ecosystem.getCustomerDirectory().getCustomerList().get(i));
         }
         initComponents();
+        for (int i = 0; i < ecosystem.getcreateNetwork().getNetwork().size(); i++) {
+             System.out.println(ecosystem.getcreateNetwork().getNetwork().get(i));
+            jComboBox1.addItem(ecosystem.getcreateNetwork().getNetwork().get(i));
+        }
     }
 
     /**
@@ -263,10 +272,48 @@ public class SignUp extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextActionPerformed
 
+    public Boolean validateFields(String username, String address, String phone, String name, char[] pwd, String email) {
+        String passregex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        Pattern pattern = Pattern.compile(passregex);
+        Matcher matcher = pattern.matcher(String.valueOf(pwd));
+        
+        if(username.isEmpty() || phone.isEmpty() || name.isEmpty() || address.isEmpty() || email.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (pwd.length < 8) {
+            JOptionPane.showMessageDialog(null,"Password cannot be less than 8","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if(phone.length() != 10) {
+            JOptionPane.showMessageDialog(null, "PhoneNumber must be of 10 digits","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(!phone.matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Phone Number must have digits only","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(!email.matches("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")){
+             JOptionPane.showMessageDialog(null, "Email is invalid","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(!matcher.matches()){
+            JOptionPane.showMessageDialog(null, "Enter valid password with atleast on number, one lowercase letter, one uppercase letter,one special char and atleast 8 digits");
+            return false;
+        }
+        return true;
+    }
+
+
     
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         // TODO add your handling code here:
-        
+        Boolean isValid = validateFields(usernameText.getText(), AddressText.getText(), phoneText.getText(), nameText.getText(), restPwdText.getPassword(), EmailTxt.getText());
+        if (!isValid) {
+            return;
+        }
+        for (int i = 0; i < customerList.size(); i++) {
+            if("customerAdmin".equals(customerList.get(i).getAccountDetails().getRoleName()) && customerList.get(i).getAccountDetails().getUsername().equals(usernameText.getText())){
+                JOptionPane.showMessageDialog(null,"Username Already Present", "Error message" ,JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
         char[] ch = restPwdText.getPassword();
         String pwd = new String(ch);
         String name = (String) jComboBox1.getSelectedItem();
