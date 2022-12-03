@@ -607,6 +607,29 @@ public class ManageCustomers extends javax.swing.JPanel {
 
     private void customerListComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerListComboActionPerformed
         // TODO add your handling code here:
+        if (customerListCombo.getSelectedItem() != "None") {
+            String selectedItem = (String) customerListCombo.getSelectedItem();
+            for (int i = 0; i < customerList.size(); i++) {
+                char[] ch = updatePwdText.getPassword();
+                String pwd = new String(ch);
+                if (customerList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    updateUsernameText.setText(customerList.get(i).getAccountDetails().getUsername());
+                    updatePwdText.setText(customerList.get(i).getAccountDetails().getPassword());
+                    updatePhoneText.setText(customerList.get(i).getPhone());
+                    updateNameText.setText(customerList.get(i).getName());
+                    updateAddressText.setText(customerList.get(i).getAddress());
+                    updateEmailTxt.setText(customerList.get(i).getEmail());
+                    
+                }
+            }
+        }else{
+            updateUsernameText.setText("");
+            updatePwdText.setText("");
+            updatePhoneText.setText("");
+            updateNameText.setText("");
+            updateAddressText.setText("");
+            updateEmailTxt.setText("");
+        }
         
     }//GEN-LAST:event_customerListComboActionPerformed
 
