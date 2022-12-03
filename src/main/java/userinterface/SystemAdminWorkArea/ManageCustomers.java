@@ -679,7 +679,49 @@ public class ManageCustomers extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-        
+        if(customerListCombo.getSelectedItem() == null || customerListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateNameText.getText(), updatePwdText.getPassword(), updateEmailTxt.getText(), "no")) {
+            return;
+        }
+        String networks = "";
+        if (customerListCombo.getSelectedItem() != null) {
+            String selectedItem = (String) customerListCombo.getSelectedItem();
+            for (int i = 0; i < customerList.size(); i++) {
+                char[] ch = updatePwdText.getPassword();
+                String pwd = new String(ch);
+                if (customerList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    customerList.get(i).setAddress(updateAddressText.getText());
+                    customerList.get(i).setPhone(updatePhoneText.getText());
+                    customerList.get(i).getAccountDetails().setPassword(pwd);
+                    customerList.get(i).setName(updateNameText.getText());
+                    customerList.get(i).getAccountDetails().setUsername(updateUsernameText.getText());
+                    customerList.get(i).setEmail(updateEmailTxt.getText());
+                    System.out.println("Customer Updated ...");
+                    networks = customerList.get(i).getNetwork();
+                    JOptionPane.showMessageDialog(this, "Customer updated successfully");
+                }
+            }
+        }
+        String selectedItem = (String) customerListCombo.getSelectedItem();
+        customerListCombo.getSelectedIndex();
+        for (int i = 0; i < customerListTable.getRowCount(); i++) {
+            if (((String) customerListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                customerListCombo.addItem(updateNameText.getText());
+                model.addRow(new Object[]{
+                    updateNameText.getText(),
+                    updateAddressText.getText(),
+                    updatePhoneText.getText(),
+                    updateEmailTxt.getText(),
+                    networks
+                });
+                model.removeRow(i);
+                customerListCombo.removeItemAt(i + 1);
+                
+            }//end of if block
+        }
+        reset();
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
