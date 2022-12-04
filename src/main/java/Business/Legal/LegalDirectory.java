@@ -33,4 +33,15 @@ public class LegalDirectory {
         }
     }
     
-    
+    public Legal createLegal(String name, UserAccount ua, String phone, String address, String Email, String Network){
+        Legal cust = new Legal();
+        cust.setName(name);
+        cust.setAccountDetails(ua);
+        cust.setAddress(address);
+        cust.setPhone(phone);
+        cust.setEmail(Email);
+        cust.setNetwork(Network);
+        legalList.add(cust);
+        return cust;
+    }
+}
