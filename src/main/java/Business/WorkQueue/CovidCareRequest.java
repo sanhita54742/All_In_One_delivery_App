@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  *
- * @author parthshah
+ * @author Admin
  */
 public class CovidCareRequest extends WorkRequest {
     
