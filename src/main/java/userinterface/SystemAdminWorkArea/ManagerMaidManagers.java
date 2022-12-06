@@ -565,7 +565,36 @@ public class ManagerMaidManagers extends javax.swing.JPanel {
     
     private void addManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addManagerButtonActionPerformed
         // TODO add your handling code here:
-        
+        Boolean isValid = validateFields(usernameText.getText(), AddressText.getText(), phoneText.getText(), restManagerText.getText(), restPwdText.getPassword(), (String) netwrokCombo.getSelectedItem());
+        if (!isValid) {
+            return;
+        }
+        for (int i = 0; i < ecosystem.getUserAccountDirectory().getUserAccountList().size(); i++) {
+            if("maidAdmin".equals(ecosystem.getUserAccountDirectory().getUserAccountList().get(i).getRoleName()) && ecosystem.getUserAccountDirectory().getUserAccountList().get(i).getUsername().equals(usernameText.getText())){
+                JOptionPane.showMessageDialog(null,"Username Already Present", "Error message" ,JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        char[] ch = restPwdText.getPassword();
+        String pwd = new String(ch);
+        String netwrokname = (String) netwrokCombo.getSelectedItem();
+        Employee employee = ecosystem.getEmployeeDirectory().createEmployee(restManagerText.getText());
+        UserAccount ua = ecosystem.getUserAccountDirectory().createUserAccount(usernameText.getText(), pwd, employee, new MaidRole(), "maidAdmin");
+        MaidManager rest = ecosystem.getMaidManagerDirectory().createMaidManager(restManagerText.getText(), ua, phoneText.getText(), (String) gendercCombobox.getSelectedItem(), AddressText.getText(), netwrokname);
+        managersList.add(rest);
+        JOptionPane.showMessageDialog(this, "Maid manager added successfully");
+        managerListCombo.addItem(restManagerText.getText());
+        model.addRow(new Object[]{
+            restManagerText.getText(),
+            AddressText.getText(),
+            phoneText.getText(),
+            netwrokname
+        });
+        restManagerText.setText("");
+        usernameText.setText("");
+        restPwdText.setText("");
+        phoneText.setText("");
+        AddressText.setText("");
     }//GEN-LAST:event_addManagerButtonActionPerformed
 
     private void updateRestManagerTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRestManagerTextActionPerformed
