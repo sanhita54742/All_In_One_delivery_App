@@ -5,11 +5,15 @@
  */
 package userinterface.SystemAdminWorkArea;
 
+<<<<<<< HEAD
 import Business.Customer.Customer;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
+=======
+
+>>>>>>> c3992c1 (Manage Customer panel added.)
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -537,6 +541,7 @@ public class ManageCustomers extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextActionPerformed
     
+<<<<<<< HEAD
        public Boolean validateFields(String username, String address, String phone, String name, char[] pwd, String email, String netwrok) {
         String passregex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         Pattern pattern = Pattern.compile(passregex);
@@ -567,6 +572,9 @@ public class ManageCustomers extends javax.swing.JPanel {
         
         return true;
     }
+=======
+   
+>>>>>>> c3992c1 (Manage Customer panel added.)
     
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         // TODO add your handling code here:
@@ -607,6 +615,7 @@ public class ManageCustomers extends javax.swing.JPanel {
 
     private void customerListComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerListComboActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         if (customerListCombo.getSelectedItem() != "None") {
             String selectedItem = (String) customerListCombo.getSelectedItem();
             for (int i = 0; i < customerList.size(); i++) {
@@ -630,6 +639,8 @@ public class ManageCustomers extends javax.swing.JPanel {
             updateAddressText.setText("");
             updateEmailTxt.setText("");
         }
+=======
+>>>>>>> c3992c1 (Manage Customer panel added.)
         
     }//GEN-LAST:event_customerListComboActionPerformed
 
@@ -679,6 +690,7 @@ public class ManageCustomers extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         if(customerListCombo.getSelectedItem() == null || customerListCombo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
             return;
@@ -722,6 +734,9 @@ public class ManageCustomers extends javax.swing.JPanel {
             }//end of if block
         }
         reset();
+=======
+        
+>>>>>>> c3992c1 (Manage Customer panel added.)
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
