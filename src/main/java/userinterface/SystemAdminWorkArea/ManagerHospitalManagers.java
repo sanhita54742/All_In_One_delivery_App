@@ -512,7 +512,46 @@ public class ManagerHospitalManagers extends javax.swing.JPanel {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
 //        Boolean isValid = validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateRestManagerText.getText(), updateRestPwdText.getPassword());
-        
+        updateAddressText.getText(), updatePhoneText.getText(), updateRestManagerText.getText(), updateRestPwdText.getPassword());
+        if(managerListCombo.getSelectedItem() == null || managerListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateRestManagerText.getText(), updateRestPwdText.getPassword(),"no")) {
+            return;
+        }
+        if (managerListCombo.getSelectedItem() != null) {
+            String selectedItem = (String) managerListCombo.getSelectedItem();
+            for (int i = 0; i < managersList.size(); i++) {
+                char[] ch = updateRestPwdText.getPassword();
+                String pwd = new String(ch);
+                if (managersList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    managersList.get(i).setAddress(updateAddressText.getText());
+                    managersList.get(i).setPhone(updatePhoneText.getText());
+                    managersList.get(i).getAccountDetails().setPassword(pwd);                    
+                    managersList.get(i).getAccountDetails().setUsername(updateUsernameText.getText());
+                    managersList.get(i).setName(updateRestManagerText.getText());
+                    JOptionPane.showMessageDialog(this, "Therapist updated successfully");
+                }
+            }
+        }
+        String selectedItem = (String) managerListCombo.getSelectedItem();
+        managerListCombo.getSelectedIndex();
+        for (int i = 0; i < managerListTable.getRowCount(); i++) {
+            if (((String) managerListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                managerListCombo.addItem(updateRestManagerText.getText());
+                model.addRow(new Object[]{
+                    updateRestManagerText.getText(),
+                    updateAddressText.getText(),
+                    updatePhoneText.getText(),
+                    managersList.get(i).getNetwork()
+                    
+                });
+                model.removeRow(i);
+                managerListCombo.removeItemAt(i + 1);
+
+            }//end of if block
+        }
+        reset();
     }//GEN-LAST:event_updateButtonActionPerformed
     
     private void deleteManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteManagerButtonActionPerformed
