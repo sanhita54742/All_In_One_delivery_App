@@ -602,7 +602,27 @@ public class ManagerHotelManagers extends javax.swing.JPanel {
 
     private void managerListComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerListComboActionPerformed
         // TODO add your handling code here:
-        
+         if (managerListCombo.getSelectedItem() != "None") {
+            String selectedItem = (String) managerListCombo.getSelectedItem();
+            for (int i = 0; i < managersList.size(); i++) {
+                char[] ch = updateRestPwdText.getPassword();
+                String pwd = new String(ch);
+                if (managersList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    updateUsernameText.setText(managersList.get(i).getAccountDetails().getUsername());
+                    updateRestPwdText.setText(managersList.get(i).getAccountDetails().getPassword());
+                    updatePhoneText.setText(managersList.get(i).getPhone());
+                    updateRestManagerText.setText(managersList.get(i).getName());
+                    updateAddressText.setText(managersList.get(i).getAddress());
+                    break;
+                }
+            }
+        }else{
+        updateUsernameText.setText("");
+        updateRestPwdText.setText("");
+        updatePhoneText.setText("");
+        updateRestManagerText.setText("");
+        updateAddressText.setText("");
+        }
     }//GEN-LAST:event_managerListComboActionPerformed
 
     private void updateRestPwdTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateRestPwdTextActionPerformed
