@@ -35,7 +35,25 @@ public class ManagerHotelManagers extends javax.swing.JPanel {
     /**
      * Creates new form ManagerRestManagers
      */
-    
+    public ManagerHotelManagers(JPanel userProcessContainer1, EcoSystem system) {
+        initComponents();
+        userProcessContainer = userProcessContainer1;
+        ecosystem = system;
+        for (int i = 0; i < system.getHotelManagerDirectory().getHotelManagerList().size(); i++) {
+            managersList.add(system.getHotelManagerDirectory().getHotelManagerList().get(i));
+        }
+        for (int i = 0; i < ecosystem.getcreateNetwork().getNetwork().size(); i++) {
+            netwrokCombo.addItem(ecosystem.getcreateNetwork().getNetwork().get(i));
+        }
+        model = new DefaultTableModel();
+        managerListTable.setModel(model);
+        model.addColumn("Name");
+        model.addColumn("Address");
+        model.addColumn("Phone");
+        model.addColumn("Network");
+        viewGroceryManagerList();
+        showUpdateList();
+    }
 
     public void viewGroceryManagerList() {
         if (managersList.size() > 0) {
