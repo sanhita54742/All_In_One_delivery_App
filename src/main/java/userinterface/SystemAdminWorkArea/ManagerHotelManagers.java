@@ -534,7 +534,36 @@ public class ManagerHotelManagers extends javax.swing.JPanel {
     
     private void deleteManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteManagerButtonActionPerformed
         // TODO add your handling code here:
-        
+        boolean flag = false;
+
+        String selectedItem = (String) managerListCombo.getSelectedItem();
+        managerListCombo.getSelectedIndex();
+        if(managerListCombo.getSelectedItem() == null || managerListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateRestManagerText.getText(), updateRestPwdText.getPassword(), "No")) {
+            return;
+        }
+        if (flag == false) {
+             Boolean isDelete = ecosystem.getUserAccountDirectory().deleteUser(selectedItem);
+             ecosystem.getHotelManagerDirectory().deleteHotelManager(selectedItem);
+//            Boolean isDelete = ecosystem.getGroceryManagerDirectory().deleteGroceryManager(selectedItem, ecosystem);            
+            for (int i = 0; i < managerListTable.getRowCount(); i++) {
+                if (((String) managerListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                    model.removeRow(i);
+                    managerListCombo.removeItemAt(i + 1);
+                    updateRestManagerText.setText("");
+                    updateUsernameText.setText("");
+                    updateRestPwdText.setText("");
+                    updatePhoneText.setText("");
+                    updateAddressText.setText("");
+                }//end of if block
+            }
+            if (isDelete) {
+                JOptionPane.showMessageDialog(this, "Hotel Manager deleted successfully");
+            }
+        }
+        reset();
     }//GEN-LAST:event_deleteManagerButtonActionPerformed
     public Boolean validateFields(String username, String address, String phone, String name, char[] pwd, String netwrok) {
         String passregex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
