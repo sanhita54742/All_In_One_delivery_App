@@ -215,7 +215,21 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
-
+         if(phoneText.getText().isEmpty() || nameText.getText().isEmpty() || locationText.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+            return;
+        }else if(phoneText.getText().length() != 10) {
+            JOptionPane.showMessageDialog(null, "PhoneNumber must be of 10 digits");
+            return;
+        }else if(!phoneText.getText().matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Phone Number must have digits only");
+            return;
+        } else {
+            grocery.setName(nameText.getText());
+            grocery.setLocation(locationText.getText());
+            grocery.setPhone(phoneText.getText());
+            JOptionPane.showMessageDialog(null, "Grocery Name updated successfully");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
     
     
