@@ -492,7 +492,35 @@ public class ManageGroceryInventoryPanel extends javax.swing.JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
+         if(itemsCombo.getSelectedItem() == null || itemsCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown");
+            return;
+        }
+        HashMap<String, String> menu = grocery.getMenu();
+        String selectedItem = (String) itemsCombo.getSelectedItem();
+        itemsCombo.getSelectedIndex();
+        if (itemsCombo.getSelectedItem() != null) {
+            for (Map.Entry<String, String> e : menu.entrySet()) {
+                if (e.getKey().equalsIgnoreCase(selectedItem)) {
+                    System.out.println("inside delete..");
+                    menu.remove(e.getKey());
+                    JOptionPane.showMessageDialog(this, "Menu Item deleted successfully");
+                }
+            }
+        }
+        for (int i = 0; i < menuTable.getRowCount(); i++) {
+            if (((String) menuTable.getValueAt(i, 0)).equals(selectedItem)) {
+                model.removeRow(i);
+                itemsCombo.removeItemAt(i + 1);
+                updateItemText.setText("");
+                updatePriceText.setText("");
+            }//end of if block
+        }
         
+        grocery.setMenu(menu);
+        System.out.println(menu.size() + "jsdje " + grocery.getMenu().size());
+        reset();
+        // TODO add your handling code here:
 
     }//GEN-LAST:event_deleteButtonActionPerformed
 
