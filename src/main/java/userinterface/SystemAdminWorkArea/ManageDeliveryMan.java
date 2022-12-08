@@ -520,7 +520,31 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextActionPerformed
     
-    
+     public Boolean validateFields(String username, String address, String phone, String name, char[] pwd,String netwrok) {
+        String passregex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+        Pattern pattern = Pattern.compile(passregex);
+        Matcher matcher = pattern.matcher(String.valueOf(pwd));
+        if(username.isEmpty() || phone.isEmpty() || name.isEmpty() || address.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if (pwd.length < 8) {
+            JOptionPane.showMessageDialog(null,"Password cannot be less than 8","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if(phone.length() != 10) {
+            JOptionPane.showMessageDialog(null, "PhoneNumber must be of 10 digits","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(!phone.matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Phone Number must have digits only","Error message", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(!matcher.matches()){
+            JOptionPane.showMessageDialog(null, "Enter valid password with atleast on number, one lowercase letter, one uppercase letter,one special char and atleast 8 digits");
+            return false;
+        }else if(netwrok == "None"){
+            JOptionPane.showMessageDialog(null, "Netwrok cannot be None");
+            return false;
+        }
+        return true;
+    }
     
     private void addManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addManagerButtonActionPerformed
         // TODO add your handling code here:
@@ -591,10 +615,80 @@ public class ManageDeliveryMan extends javax.swing.JPanel {
 
     private void deleteManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteManagerButtonActionPerformed
         // TODO add your handling code here:
+        boolean flag = false;
+
+        String selectedItem = (String) delListCombo.getSelectedItem();
+        delListCombo.getSelectedIndex();
+        if(delListCombo.getSelectedItem() == null || delListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateNameText.getText(), updatePwdText.getPassword(), "no")) {
+            return;
+        }
+        if (flag == false) {
+            Boolean isDeleteUser = ecosystem.getUserAccountDirectory().deleteUser(selectedItem);
+            ecosystem.getDeliveryManDirectory().deleteDeliveryMan(selectedItem);
+
+            for (int i = 0; i < deliveryManListTable.getRowCount(); i++) {
+                if (((String) deliveryManListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                    model.removeRow(i);
+                    delListCombo.removeItemAt(i + 1);
+                    updateNameText.setText("");
+                    updateUsernameText.setText("");
+                    updatePwdText.setText("");
+                    updatePhoneText.setText("");
+                    updateAddressText.setText("");
+                }//end of if block
+            }
+            if (isDeleteUser) {
+                System.out.println(selectedItem + "Deleted ...");
+                JOptionPane.showMessageDialog(this, "Delivery Man deleted successfully");
+            }
+        }
+        reset();
     }//GEN-LAST:event_deleteManagerButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
+        if(delListCombo.getSelectedItem() == null || delListCombo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null,"Select a value from dropdown","Error message", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (!validateFields(updateUsernameText.getText(), updateAddressText.getText(), updatePhoneText.getText(), updateNameText.getText(), updatePwdText.getPassword() ,"no")) {
+            return;
+        }
+        if (delListCombo.getSelectedItem() != null) {
+            String selectedItem = (String) delListCombo.getSelectedItem();
+            for (int i = 0; i < delManList.size(); i++) {
+                char[] ch = updatePwdText.getPassword();
+                String pwd = new String(ch);
+                if (delManList.get(i).getName().equalsIgnoreCase(selectedItem)) {
+                    delManList.get(i).setAddress(updateAddressText.getText());
+                    delManList.get(i).setPhone(updatePhoneText.getText());
+                    delManList.get(i).getAccountDetails().setPassword(pwd);
+                    delManList.get(i).setName(updateNameText.getText());
+                    delManList.get(i).getAccountDetails().setUsername(updateUsernameText.getText());
+                    System.out.println(selectedItem + "Deleted ...");
+                    JOptionPane.showMessageDialog(this, "Delivery Man updated successfully");
+                }
+            }
+        }
+        String selectedItem = (String) delListCombo.getSelectedItem();
+        delListCombo.getSelectedIndex();
+        for (int i = 0; i < deliveryManListTable.getRowCount(); i++) {
+            if (((String) deliveryManListTable.getValueAt(i, 0)).equals(selectedItem)) {
+                delListCombo.addItem(updateNameText.getText());
+                model.addRow(new Object[]{
+                    updateNameText.getText(),
+                    updateAddressText.getText(),
+                    updatePhoneText.getText(),
+                    "Boston"
+                });
+                model.removeRow(i);
+                delListCombo.removeItemAt(i + 1);
+
+            }//end of if block
+        }
+        reset();
        
     }//GEN-LAST:event_updateButtonActionPerformed
     

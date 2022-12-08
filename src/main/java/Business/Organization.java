@@ -4,7 +4,14 @@
  */
 package Business;
 
-
+import Business.Customer.CustomerDirectory;
+import Business.Legal.LegalDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
+import Business.Employee.EmployeeDirectory;
+import Business.Orders.OrderDirectory;
+import Business.Orders.HotelDirectory;
+import Business.Grocery.GroceryDirectory;
+import Business.GroceryManager.GroceryManagerDirectory;
 import Business.Maid.MaidDirectory;
 import Business.MaidManager.MaidManagerDirectory;
 import Business.Hotel.Hotel_Directory;
@@ -41,6 +48,52 @@ public abstract class Organization {
     private HotelManagerDirectory hotelManagerDirectory;
     private HospitalManagerDirectory hospitalManagerDirectory;
     private OrderDirectory orderDirectory;
+    
+    
+    
+    public enum Type{
+        CovidCare("CovidCare Organization"),
+        HotelAdmin("HotelAdmin"),
+        GroceryAdmin("GroceryAdmin"),
+        MaidAdmin("MaidAdmin"),
+        HospitalAdmin("HospitalAdmin"),
+        Customer("Customer"),
+        Legal("LegalAdmin"),
+        DeliveryMan("Delivery"),
+        SysAdmin("Sysadmin");
+        
+        private String value;
+        private Type(String value) {
+            this.value = value;
+        }
+        public String getValue() {
+            return value;
+        }
+    }
+    
+    
+    public Organization(String name) {
+        this.name = name;
+        workQueue = new WorkQueue();
+        employeeDirectory = new EmployeeDirectory();
+        userAccountDirectory = new UserAccountDirectory();
+        createNetwork = new createNetwork();
+        groceryDirectory = new GroceryDirectory();
+        maidDirectory = new MaidDirectory();
+        hotelDirectory = new HotelDirectory();
+        hotel_Directory = new Hotel_Directory();
+        hotelManagerDirectory = new HotelManagerDirectory();
+        deliveryManDirectory = new DeliveryManDirectory();  
+        hospitalManagerDirectory = new HospitalManagerDirectory();
+        customerDirectory = new CustomerDirectory();
+        legalDirectory = new LegalDirectory();
+        groceryManagerDirectory = new GroceryManagerDirectory();
+        maidManagerDirectory = new MaidManagerDirectory();
+        orderDirectory = new OrderDirectory();
+        organizationID = counter;
+        ++counter;
+    }
+ 
     
     
     public Organization(){

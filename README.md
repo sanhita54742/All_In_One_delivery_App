@@ -1,4 +1,9 @@
 # AED_final_proj
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Sanhita
 #Project Name: OneTouch
 
 
@@ -34,3 +39,7 @@ UML DIAGRAM:
 SEQUENCE DIAGRAM:
 
 ![sequence diagram for AED proj (1)](https://user-images.githubusercontent.com/42796279/206959780-6cb0358b-dc13-4032-a9b8-a46c4fdacc0c.jpg)
+<<<<<<< HEAD
+=======
+>>>>>>> main
+>>>>>>> Sanhita
