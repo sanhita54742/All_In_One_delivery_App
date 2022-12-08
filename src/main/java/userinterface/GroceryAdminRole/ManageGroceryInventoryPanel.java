@@ -399,7 +399,22 @@ public class ManageGroceryInventoryPanel extends javax.swing.JPanel {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        
+         Boolean isValid = validateFields(itemText.getText(), priceText.getText());
+        if (!isValid) {
+            return;
+        }
+        HashMap<String, String> menu = grocery.getMenu();
+        menu.put(itemText.getText(), priceText.getText());
+        grocery.setMenu(menu);
+        JOptionPane.showMessageDialog(this, "Item added successfully");
+        itemsCombo.addItem(itemText.getText());
+        System.out.println(itemText.getText() + " test " + priceText.getText());
+        model.addRow(new Object[]{
+            itemText.getText(),
+            priceText.getText()
+        });
+        itemText.setText("");
+        priceText.setText("");
 
     }//GEN-LAST:event_addButtonActionPerformed
     public void reset() {
