@@ -1,15 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package userinterface.HospitalAdminRole;
+package userinterface.MaidAdminRole;
+
 
 import Business.EcoSystem;
-import Business.HospitalManager.HospitalManager;
-import Business.UserAccount.UserAccount;
+
+
+import Business.MaidManager.MaidManager;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -17,69 +20,93 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
+import Business.Customer.SendMail;
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author Admin
  */
-public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
-
+public class ManageMaidServicesPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    HospitalManager hospitalManager;
+    MaidManager maidmanager;
     DefaultTableModel model;
     UserAccount ua;
 
-    /**
-     * Creates new form ManageRestaurantMenu
-     */
-    public ManageTherapistInventoryPanel(JPanel userProcessContainer, EcoSystem system, HospitalManager hospitalManager, UserAccount ua) {
+    public ManageMaidServicesPanel(JPanel userProcessContainer, EcoSystem system, MaidManager maidmanager,UserAccount ua) {
         initComponents();
-        ecosystem = system;
-        this.ua= ua;
-        this.userProcessContainer = userProcessContainer;
-        this.hospitalManager = hospitalManager;
+        this.ecosystem = system;
+        this.maidmanager = maidmanager;
         model = new DefaultTableModel();
-        menuTable.setModel(model);
-        model.addColumn("Therapy Name");
-        model.addColumn("Price");
-        showDeleteList();
-        viewMenuList();
-    }
+        this.userProcessContainer = userProcessContainer;
+        ManageServiceTabel.setModel(model);
+        model.addColumn("Service Name");
+        model.addColumn("Service Price");
+        System.out.println(maidmanager.getName());
+        
 
-    public void viewMenuList() {
-        HashMap<String, String> menu = hospitalManager.getMenu();
+        viewMenuList();
+        showDeleteList();
+        
+    }
+    
+      public void viewMenuList() {
+        HashMap<String, String> menu = maidmanager.getMenu();
+        
         if (menu.size() > 0) {
             for (Map.Entry<String, String> e : menu.entrySet()) {
                 model.addRow(new Object[]{
                     e.getKey(),
                     e.getValue()
-                });
-            }
-        }
-    }
+                });}}}
 
-    public void showDeleteList() {
-        HashMap<String, String> menu = hospitalManager.getMenu();
-        if (hospitalManager.getMenu().size() > 0) {
+        public void showDeleteList() {
+        HashMap<String, String> menu = maidmanager.getMenu();
+        if (maidmanager.getMenu().size() > 0) {
             for (Map.Entry<String, String> e : menu.entrySet()) {
                 itemsCombo.addItem(e.getKey());
             }
         }
     }
+        
+          public void reset() {
+        itemsCombo.setSelectedIndex(0);
+        updateItemText.setText("");
+        updatePriceText.setText("");
+
+    }
+        
+     public Boolean validateFields(String item, String price) {
+        String pattern = "^(\\d*\\.)?\\d+$  ";
+        java.util.regex.Pattern r = java.util.regex.Pattern.compile(pattern);
+        Matcher m = r.matcher(price);
+        if(item.isEmpty() || price.isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Fields cannot be empty");
+            return false;
+        } 
+//        else if(!m.find()) {
+//            JOptionPane.showMessageDialog(null, "Please enter Valid price");
+//            return false;
+//        }
+        return true;
+    }
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        menuTable = new javax.swing.JTable();
-        btnBack = new javax.swing.JButton();
+        ManageServiceTabel = new javax.swing.JTable();
+        BackButton = new javax.swing.JButton();
         AddItemPanel = new javax.swing.JPanel();
         AddItemLabel = new javax.swing.JLabel();
-        itemText = new javax.swing.JTextField();
         priceText = new javax.swing.JTextField();
         AddItemNameLabel = new javax.swing.JLabel();
         AddItemPriceLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
+        ComboBoxService = new javax.swing.JComboBox<>();
         UpdateItemPanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -90,14 +117,16 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
         updatePriceText = new javax.swing.JTextField();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(204, 204, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        menuTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        menuTable.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        menuTable.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Manage Household Services");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        ManageServiceTabel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        ManageServiceTabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -108,40 +137,29 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        menuTable.setGridColor(new java.awt.Color(0, 0, 0));
-        menuTable.setRowHeight(25);
-        jScrollPane1.setViewportView(menuTable);
+        jScrollPane1.setViewportView(ManageServiceTabel);
 
-        btnBack.setBackground(new java.awt.Color(0, 0, 0));
-        btnBack.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
-        btnBack.setForeground(new java.awt.Color(255, 255, 255));
-        btnBack.setText("Back");
-        btnBack.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setText("Back");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
 
-        AddItemLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        AddItemPanel.setBackground(new java.awt.Color(204, 204, 255));
+
+        AddItemLabel.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         AddItemLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        AddItemLabel.setText("Add Therapy");
-
-        itemText.setForeground(new java.awt.Color(72, 72, 72));
-        itemText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemTextActionPerformed(evt);
-            }
-        });
+        AddItemLabel.setText("Add Service");
 
         priceText.setForeground(new java.awt.Color(72, 72, 72));
 
-        AddItemNameLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        AddItemNameLabel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         AddItemNameLabel.setForeground(new java.awt.Color(72, 72, 72));
         AddItemNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        AddItemNameLabel.setText("Name");
+        AddItemNameLabel.setText("Service");
 
-        AddItemPriceLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        AddItemPriceLabel.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         AddItemPriceLabel.setForeground(new java.awt.Color(72, 72, 72));
         AddItemPriceLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         AddItemPriceLabel.setText("Price");
@@ -150,63 +168,64 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
         addButton.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         addButton.setForeground(new java.awt.Color(255, 255, 255));
         addButton.setText("Add");
-        addButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        addButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addButtonActionPerformed(evt);
             }
         });
 
+        ComboBoxService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cleaning", "Gardening", "Washing", "BabySitter" }));
+
         javax.swing.GroupLayout AddItemPanelLayout = new javax.swing.GroupLayout(AddItemPanel);
         AddItemPanel.setLayout(AddItemPanelLayout);
         AddItemPanelLayout.setHorizontalGroup(
             AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddItemPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(AddItemNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddItemPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(priceText)
-                    .addComponent(itemText))
-                .addGap(29, 29, 29))
             .addGroup(AddItemPanelLayout.createSequentialGroup()
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AddItemPanelLayout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(AddItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(139, 139, 139)
+                        .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(AddItemPanelLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addGap(120, 120, 120)
+                        .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddItemPriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddItemNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBoxService, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         AddItemPanelLayout.setVerticalGroup(
             AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AddItemPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
                 .addComponent(AddItemLabel)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddItemNameLabel))
-                .addGap(24, 24, 24)
+                    .addComponent(AddItemNameLabel)
+                    .addComponent(ComboBoxService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(AddItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddItemPriceLabel)
                     .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
+
+        UpdateItemPanel.setBackground(new java.awt.Color(204, 204, 255));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Update / Delete Therapy Session");
+        jLabel4.setText("Update / Delete an Item");
 
-        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(72, 72, 72));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel5.setText("Select Name");
+        jLabel5.setText("Select Item");
 
         itemsCombo.setForeground(new java.awt.Color(72, 72, 72));
         itemsCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--None" }));
@@ -216,10 +235,9 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
             }
         });
 
-        ItemPanel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         ItemPanel.setForeground(new java.awt.Color(72, 72, 72));
         ItemPanel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        ItemPanel.setText("Session");
+        ItemPanel.setText("Item");
 
         updateItemText.setForeground(new java.awt.Color(72, 72, 72));
         updateItemText.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +246,6 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
             }
         });
 
-        PriceLabel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         PriceLabel.setForeground(new java.awt.Color(72, 72, 72));
         PriceLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         PriceLabel.setText("Price");
@@ -239,7 +256,7 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
         updateButton.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         updateButton.setForeground(new java.awt.Color(255, 255, 255));
         updateButton.setText("Update");
-        updateButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        updateButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);
@@ -250,7 +267,7 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
         deleteButton.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
-        deleteButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        deleteButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -270,23 +287,23 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(itemsCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(UpdateItemPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(ItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updateItemText, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6))
-                    .addGroup(UpdateItemPanelLayout.createSequentialGroup()
-                        .addComponent(PriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(updatePriceText, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGroup(UpdateItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(UpdateItemPanelLayout.createSequentialGroup()
+                                .addComponent(ItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(updateItemText, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(UpdateItemPanelLayout.createSequentialGroup()
+                                .addComponent(PriceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(updatePriceText, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 32, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(UpdateItemPanelLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(60, 60, 60)
                 .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         UpdateItemPanelLayout.setVerticalGroup(
             UpdateItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,97 +322,90 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
                 .addGroup(UpdateItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PriceLabel)
                     .addComponent(updatePriceText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(UpdateItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(UpdateItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("View");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/shutter.jpg"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(UpdateItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(127, 127, 127)
+                        .addComponent(UpdateItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(352, 352, 352)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(AddItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
-                        .addComponent(UpdateItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(AddItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateItemPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void itemTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTextActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemTextActionPerformed
-
-    private void updateItemTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateItemTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updateItemTextActionPerformed
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        userinterface.MaidAdminRole.AdminWorkAreaJPanel sysAdminwjp = (userinterface.MaidAdminRole.AdminWorkAreaJPanel) component;
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
-        Boolean isValid = validateFields(itemText.getText(), priceText.getText());
+        Boolean isValid = validateFields((String) ComboBoxService.getSelectedItem(), priceText.getText());
         if (!isValid) {
             return;
         }
-        HashMap<String, String> menu = hospitalManager.getMenu();
-        menu.put(itemText.getText(), priceText.getText());
-        hospitalManager.setMenu(menu);
+         
+        HashMap<String, String> menu = maidmanager.getMenu();
+        
+        menu.put((String) ComboBoxService.getSelectedItem(), priceText.getText());
+        maidmanager.setMenu(menu);
         JOptionPane.showMessageDialog(this, "Item added successfully");
-        itemsCombo.addItem(itemText.getText());
-        System.out.println(itemText.getText() + " test " + priceText.getText());
+        itemsCombo.addItem((String) ComboBoxService.getSelectedItem());
+        System.out.println((String) ComboBoxService.getSelectedItem() + " test " + priceText.getText());
         model.addRow(new Object[]{
-            itemText.getText(),
+            (String) ComboBoxService.getSelectedItem(),
             priceText.getText()
         });
-        itemText.setText("");
+       
         priceText.setText("");
 
     }//GEN-LAST:event_addButtonActionPerformed
-    public void reset() {
-        itemsCombo.setSelectedIndex(0);
-        updateItemText.setText("");
-        updatePriceText.setText("");
 
-    }
     private void itemsComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemsComboActionPerformed
-        // TODO add your handling code here:
-        HashMap<String, String> menu = hospitalManager.getMenu();
+     // TODO add your handling code here:
+        HashMap<String, String> menu = maidmanager.getMenu();
         if (itemsCombo.getSelectedItem() != null) {
             String selectedItem = (String) itemsCombo.getSelectedItem();
             for (Map.Entry<String, String> e : menu.entrySet()) {
@@ -405,31 +415,21 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
                 }
             }
         }
-
     }//GEN-LAST:event_itemsComboActionPerformed
-    public Boolean validateFields(String item, String price) {
-        String pattern = "^(\\d*\\.)?\\d+$";
-        java.util.regex.Pattern r = java.util.regex.Pattern.compile(pattern);
-        Matcher m = r.matcher(price);
-        if(item.isEmpty() || price.isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Fields cannot be empty");
-            return false;
-        } else if(!m.find()) {
-            JOptionPane.showMessageDialog(null, "Please enter Valid price");
-            return false;
-        }
-        return true;
-    }
-    
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+
+    private void updateItemTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateItemTextActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_updateItemTextActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+          // TODO add your handling code here:
         if(itemsCombo.getSelectedItem() == null || itemsCombo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null,"Select a value from dropdown");
             return;
         } else if (!validateFields(updateItemText.getText(), updatePriceText.getText())) {
             return;
         }
-        HashMap<String, String> menu = hospitalManager.getMenu();
+        HashMap<String, String> menu = maidmanager.getMenu();
         if (itemsCombo.getSelectedItem() != null) {
             String selectedItem = (String) itemsCombo.getSelectedItem();
             for (Map.Entry<String, String> e : menu.entrySet()) {
@@ -440,11 +440,11 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
                 }
             }
         }
-        hospitalManager.setMenu(menu);
+        maidmanager.setMenu(menu);
         String selectedItem = (String) itemsCombo.getSelectedItem();
         itemsCombo.getSelectedIndex();
-        for (int i = 0; i < menuTable.getRowCount(); i++) {
-            if (((String) menuTable.getValueAt(i, 0)).equals(selectedItem)) {
+        for (int i = 0; i < ManageServiceTabel.getRowCount(); i++) {
+            if (((String) ManageServiceTabel.getValueAt(i, 0)).equals(selectedItem)) {
                 itemsCombo.addItem(updateItemText.getText());
                 model.addRow(new Object[]{
                     updateItemText.getText(),
@@ -461,12 +461,12 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
         if(itemsCombo.getSelectedItem() == null || itemsCombo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null,"Select a value from dropdown");
             return;
         }
-        HashMap<String, String> menu = hospitalManager.getMenu();
+        HashMap<String, String> menu = maidmanager.getMenu();
         String selectedItem = (String) itemsCombo.getSelectedItem();
         itemsCombo.getSelectedIndex();
         if (itemsCombo.getSelectedItem() != null) {
@@ -478,8 +478,8 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
                 }
             }
         }
-        for (int i = 0; i < menuTable.getRowCount(); i++) {
-            if (((String) menuTable.getValueAt(i, 0)).equals(selectedItem)) {
+        for (int i = 0; i < ManageServiceTabel.getRowCount(); i++) {
+            if (((String) ManageServiceTabel.getValueAt(i, 0)).equals(selectedItem)) {
                 model.removeRow(i);
                 itemsCombo.removeItemAt(i + 1);
                 updateItemText.setText("");
@@ -487,19 +487,12 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
             }//end of if block
         }
         
-        hospitalManager.setMenu(menu);
-        System.out.println(menu.size() + "jsdje " + hospitalManager.getMenu().size());
+        maidmanager.setMenu(menu);
+        System.out.println(menu.size() + "jsdje " + maidmanager.getMenu().size());
         reset();
         // TODO add your handling code here:
 
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        AdminWorkAreaJPanel dm= new AdminWorkAreaJPanel(userProcessContainer, ua, ecosystem);
-        userProcessContainer.add("manageNetworkJPanel",dm);
-        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -507,20 +500,19 @@ public class ManageTherapistInventoryPanel extends javax.swing.JPanel {
     private javax.swing.JLabel AddItemNameLabel;
     private javax.swing.JPanel AddItemPanel;
     private javax.swing.JLabel AddItemPriceLabel;
+    private javax.swing.JButton BackButton;
+    private javax.swing.JComboBox<String> ComboBoxService;
     private javax.swing.JLabel ItemPanel;
+    private javax.swing.JTable ManageServiceTabel;
     private javax.swing.JLabel PriceLabel;
     private javax.swing.JPanel UpdateItemPanel;
     private javax.swing.JButton addButton;
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JTextField itemText;
     private javax.swing.JComboBox<String> itemsCombo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable menuTable;
     private javax.swing.JTextField priceText;
     private javax.swing.JButton updateButton;
     private javax.swing.JTextField updateItemText;
