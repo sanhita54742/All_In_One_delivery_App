@@ -6,14 +6,20 @@
 package userinterface.SystemAdminWorkArea;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8da0e10 (Validations added.)
 import Business.Customer.Customer;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
+<<<<<<< HEAD
 =======
 
 >>>>>>> c3992c1 (Manage Customer panel added.)
+=======
+>>>>>>> 8da0e10 (Validations added.)
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -542,6 +548,9 @@ public class ManageCustomers extends javax.swing.JPanel {
     }//GEN-LAST:event_nameTextActionPerformed
     
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8da0e10 (Validations added.)
        public Boolean validateFields(String username, String address, String phone, String name, char[] pwd, String email, String netwrok) {
         String passregex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         Pattern pattern = Pattern.compile(passregex);
@@ -572,9 +581,12 @@ public class ManageCustomers extends javax.swing.JPanel {
         
         return true;
     }
+<<<<<<< HEAD
 =======
    
 >>>>>>> c3992c1 (Manage Customer panel added.)
+=======
+>>>>>>> 8da0e10 (Validations added.)
     
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         // TODO add your handling code here:
