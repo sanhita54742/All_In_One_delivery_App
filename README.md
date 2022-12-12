@@ -10,7 +10,13 @@ The ONETOUCH Application's objective is to offer a centralized platform for conn
 
 
 
+UML DIAGRAM:
+
 ![Blank diagram (3)](https://user-images.githubusercontent.com/42796279/206959670-4ebe7943-1388-4886-afb2-3270562d094f.jpeg)
 
+
+
+
+SEQUENCE DIAGRAM:
 
 ![sequence diagram for AED proj (1)](https://user-images.githubusercontent.com/42796279/206959780-6cb0358b-dc13-4032-a9b8-a46c4fdacc0c.jpg)
