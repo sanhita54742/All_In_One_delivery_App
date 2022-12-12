@@ -9,6 +9,10 @@ Project Teammates
 1. Sanhita Sawant (NUID: 002786796)
 2. Margi Adesara(NUID: 002792152)
 
+
+
+
+
 Project Description
 
 
@@ -21,6 +25,8 @@ The ONETOUCH Application's objective is to offer a centralized platform for conn
 UML DIAGRAM:
 
 ![Blank diagram (3)](https://user-images.githubusercontent.com/42796279/206959670-4ebe7943-1388-4886-afb2-3270562d094f.jpeg)
+
+
 
 
 
