@@ -1,6 +1,6 @@
 # AED_final_proj
-#Project Name= OneTouch
-#Project Teammates
+#Project Name: OneTouch
+Project Teammates
 1. Sanhita Sawant (NUID: 002786796)
 2. Margi Adesara(NUID: 002792152)
 
